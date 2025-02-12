@@ -190,3 +190,44 @@ docker run -d -p 8600:8080 --name supermario pengbai/docker-supermario
 ![Game Play 1](./docker/Jour01/job03/images/gameplay1.jpg)
 ![Game Play 2](./docker/Jour01/job03/images/gameplay2.jpg)
 ![Game Play 3](./docker/Jour01/job03/images/gameplay3.jpg)
+
+### 5. Arrêt du conteneur
+#### Méthode 1 : Via l'ID du conteneur
+```bash
+# Trouver l'ID du conteneur
+docker ps
+
+# Arrêter le conteneur avec l'ID
+docker stop 10f8754a8e1a
+```
+![Stop Container ID](./docker/Jour01/job03/images/stop_id.jpg)
+
+#### Méthode 2 : Via le nom du conteneur
+```bash
+# Arrêter le conteneur avec le nom
+docker stop supermario-hd
+```
+![Stop Container Name](./docker/Jour01/job03/images/stop_name.jpg)
+
+### 6. Suppression du conteneur
+#### Méthode 1 : Via le terminal (méthode utilisée)
+```bash
+# Supprimer le conteneur avec l'ID ou le nom
+docker rm supermario-hd
+```
+![Remove Container Terminal](./docker/Jour01/job03/images/rm_terminal.jpg)
+
+#### Méthode 2 : Via Docker Desktop
+> Note : Cette méthode est également possible en utilisant l'interface graphique de Docker Desktop, en allant dans l'onglet "Containers" et en cliquant sur l'icône poubelle.
+
+### 7. Suppression de l'image
+#### Méthode 1 : Via le terminal (méthode utilisée)
+```bash
+# Supprimer l'image
+docker rmi pengbai/docker-supermario
+```
+![Remove Image Terminal](./docker/Jour01/job03/images/rmi_terminal.jpg)
+
+#### Méthode 2 : Via Docker Desktop
+> Note : Cette méthode est également possible en utilisant l'interface graphique de Docker Desktop, en allant dans l'onglet "Images" et en cliquant sur l'icône poubelle.
+
