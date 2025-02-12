@@ -139,3 +139,54 @@ docker tag welcome-to-docker-v2:modified emmanuelshlimon/welcome-to-docker:v1
 docker push emmanuelshlimon/welcome-to-docker:v1
 ```
 ![Push Docker Hub](./docker/Jour01/job02/images/push_dockerhub.png)
+
+### 9. Test de l'image d'un collègue
+```bash
+# Pull de l'image du collègue
+docker pull [username-collegue]/welcome-to-docker:v1
+
+# Lancement de son image
+docker run -d -p 8090:3000 --name welcome-to-docker-collegue [username-collegue]/welcome-to-docker:v1
+
+# Modification et republication
+docker build -t emmanuelshlimon/welcome-to-docker:v2-from-[username-collegue] .
+docker push emmanuelshlimon/welcome-to-docker:v2-from-[username-collegue]
+```
+
+> Image originale créée par [Nom du collègue]
+
+## Job 03 - Super Mario Docker
+
+### 1. Recherche et découverte de l'image
+#### Méthode 1 : Via le terminal Docker
+```bash
+# Recherche de l'image dans Docker Hub
+docker search pengbai/docker-supermario
+```
+![Search Terminal](./docker/Jour01/job03/images/search_terminal.jpg)
+
+### 2. Récupération de l'image
+#### Méthode 1 : Via le terminal
+```bash
+# Pull de l'image via le terminal
+docker pull pengbai/docker-supermario
+```
+![Pull Terminal](./docker/Jour01/job03/images/pull_terminal.jpg)
+
+### 3. Lancement du conteneur
+#### Méthode 1 : Via le terminal
+```bash
+# Lancement avec le port 8600
+docker run -d -p 8600:8080 --name supermario pengbai/docker-supermario
+```
+![Run Terminal](./docker/Jour01/job03/images/run_terminal.jpg)
+
+#### Méthode 2 : Via Docker Desktop
+[Capture d'écran montrant les étapes dans Docker Desktop]
+![Run Desktop](./docker/Jour01/job03/images/run_desktop.jpg)
+
+### 4. Test du jeu
+[Captures d'écran du jeu en cours]
+![Game Play 1](./docker/Jour01/job03/images/gameplay1.jpg)
+![Game Play 2](./docker/Jour01/job03/images/gameplay2.jpg)
+![Game Play 3](./docker/Jour01/job03/images/gameplay3.jpg)
