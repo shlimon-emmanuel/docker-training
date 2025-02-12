@@ -93,3 +93,36 @@ docker ps
 docker logs welcome-to-docker-v2
 ```
 ![Vérification conteneur](./docker/Jour01/job02/images/psimages.jpg)
+
+### 5. Accès au conteneur
+```bash
+docker exec -it welcome-to-docker-v2 sh
+```
+![Accès conteneur](./docker/Jour01/job02/images/access_container.jpg)
+
+### 6. Modification du code
+J'ai modifié le fichier `src/App.js` pour personnaliser l'application :
+```javascript
+// Modification du message d'accueil
+const shareMessage = "I just modified my first Docker container!";
+
+// Modification du texte affiché
+<h1 style={{ marginBottom: "0px" }}>Bravo Emmanuel!!!</h1>
+<p style={{ marginTop: "10px", marginBottom: "50px" }}>
+  Vous avez modifié votre premier conteneur Docker avec succès.
+</p>
+```
+
+### 7. Reconstruction et test des modifications
+```bash
+# Arrêt et suppression des anciens conteneurs
+docker stop welcome-to-docker-v2 welcome-to-docker-v2-modified
+docker rm welcome-to-docker-v2 welcome-to-docker-v2-modified
+
+# Reconstruction de l'image avec les modifications
+docker build -t welcome-to-docker-v2:modified .
+
+# Lancement du nouveau conteneur
+docker run -d -p 8088:3000 --name welcome-to-docker-v2 welcome-to-docker-v2:modified
+```
+![Modified Running](./docker/Jour01/job02/images/modif.png)

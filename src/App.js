@@ -1,7 +1,7 @@
 import "./App.css";
 import Confetti from "./Confetti";
 
-const shareMessage = "I just ran my first container using Docker";
+const shareMessage = "I just modified my first Docker container!";
 const shareLink = "https://docker.com/";
 
 const App = () => {
@@ -9,9 +9,9 @@ const App = () => {
     <div className="App">
       <Confetti />
       <header className="App-header">
-        <h1 style={{ marginBottom: "0px" }}>Congratulations!!!</h1>
+        <h1 style={{ marginBottom: "0px" }}>Bravo Emmanuel!!!</h1>
         <p style={{ marginTop: "10px", marginBottom: "50px" }}>
-          You ran your first container.
+          Vous avez modifié votre premier conteneur Docker avec succès.
         </p>
         <div>
           <a
