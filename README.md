@@ -143,17 +143,29 @@ docker push emmanuelshlimon/welcome-to-docker:v1
 ### 9. Test de l'image d'un collègue
 ```bash
 # Pull de l'image du collègue
-docker pull [username-collegue]/welcome-to-docker:v1
+docker pull kilam13/welcome-to-docker:latest
 
 # Lancement de son image
-docker run -d -p 8090:3000 --name welcome-to-docker-collegue [username-collegue]/welcome-to-docker:v1
-
-# Modification et republication
-docker build -t emmanuelshlimon/welcome-to-docker:v2-from-[username-collegue] .
-docker push emmanuelshlimon/welcome-to-docker:v2-from-[username-collegue]
+docker run -d -p 8090:3000 --name welcome-to-docker-collegue kilam13/welcome-to-docker:latest
 ```
 
-> Image originale créée par [Nom du collègue]
+> Image originale créée par Malik ([kilam13])
+
+### 10. Modification de l'image d'un collègue
+> Image originale créée par Malik ([kilam13])
+
+```bash
+# Récupération de l'image du collègue
+docker pull kilam13/welcome-to-docker
+
+# Test de son image
+docker run -d -p 8090:3000 --name welcome-to-docker-collegue kilam13/welcome-to-docker:v1
+
+# Publication de notre version modifiée
+docker build -t emmanuelshlimon/welcome-to-docker:v2-from-kilam13 .
+docker push emmanuelshlimon/welcome-to-docker:v2-from-kilam13
+```
+![Test Collègue](./docker/Jour01/job02/images/test_collegue.jpg)
 
 ## Job 03 - Super Mario Docker
 
