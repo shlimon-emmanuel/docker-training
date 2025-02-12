@@ -32,7 +32,7 @@ docker run -d -p 8088:80 welcome-to-docker
 ### 4. Suppression
 ```bash
 # Suppression du conteneur
-docker rm [ID_CONTENEUR]
+docker rm welcome-to-docker
 ```
 ![Delete Container](./docker/Jour01/job01/images/Delete.JPG)
 
@@ -126,3 +126,16 @@ docker build -t welcome-to-docker-v2:modified .
 docker run -d -p 8088:3000 --name welcome-to-docker-v2 welcome-to-docker-v2:modified
 ```
 ![Modified Running](./docker/Jour01/job02/images/modif.png)
+
+### 8. Publication de l'image sur Docker Hub
+```bash
+# Connexion à Docker Hub
+docker login
+
+# Tagger l'image pour Docker Hub
+docker tag welcome-to-docker-v2:modified emmanuelshlimon/welcome-to-docker:v1
+
+# Publier l'image
+docker push emmanuelshlimon/welcome-to-docker:v1
+```
+![Push Docker Hub](./docker/Jour01/job02/images/push_dockerhub.png)
