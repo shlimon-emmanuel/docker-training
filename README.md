@@ -155,14 +155,13 @@ docker run -d -p 8090:3000 --name welcome-to-docker-collegue kilam13/welcome-to-
 > Image originale créée par Malik ([kilam13])
 
 ```bash
-# Récupération de l'image du collègue
-docker pull kilam13/welcome-to-docker
-
-# Test de son image
-docker run -d -p 8090:3000 --name welcome-to-docker-collegue kilam13/welcome-to-docker:v1
-
-# Publication de notre version modifiée
+# Reconstruction avec nos modifications
 docker build -t emmanuelshlimon/welcome-to-docker:v2-from-kilam13 .
+
+# Lancement de notre version modifiée
+docker run -d -p 8091:3000 --name welcome-to-docker-from-kilam13 emmanuelshlimon/welcome-to-docker:v2-from-kilam13
+
+# Publication sur Docker Hub
 docker push emmanuelshlimon/welcome-to-docker:v2-from-kilam13
 ```
 ![Test Collègue](./docker/Jour01/job02/images/test_collegue.jpg)
@@ -242,4 +241,47 @@ docker rmi pengbai/docker-supermario
 
 #### Méthode 2 : Via Docker Desktop
 > Note : Cette méthode est également possible en utilisant l'interface graphique de Docker Desktop, en allant dans l'onglet "Images" et en cliquant sur l'icône poubelle.
+
+## Job 04 - Docker Apache PHP
+
+### 1. Création des fichiers
+#### index.php
+```php
+<?php phpinfo(); ?>
+```
+
+#### Dockerfile
+```dockerfile
+FROM php:8.2-apache
+COPY index.php /var/www/html/
+EXPOSE 80
+```
+
+### 2. Construction de l'image
+```bash
+# Se positionner dans le dossier
+cd docker/Jour02/job04
+
+# Construire l'image
+docker build -t apache-php-info .
+```
+![Build Image](./docker/Jour02/job04/images/build_image.jpg)
+
+### 3. Lancement du conteneur
+```bash
+# Lancer le conteneur
+docker run -d -p 8080:80 --name apache-php apache-php-info
+```
+![Run Container](./docker/Jour02/job04/images/run_container.jpg)
+
+### 4. Test de l'application
+Accès à l'application via http://localhost:8080 pour voir les informations PHP
+![PHP Info](./docker/Jour02/job04/images/php_info.jpg)
+
+### 5. Arrêt du conteneur
+```bash
+# Arrêter le conteneur
+docker stop apache-php
+```
+![Stop Container](./docker/Jour02/job04/images/stop_apache.jpg)
 
