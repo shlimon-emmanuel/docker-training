@@ -285,3 +285,68 @@ docker stop apache-php
 ```
 ![Stop Container](./docker/Jour02/job04/images/stop_apache.jpg)
 
+## Job 05 - Tic Tac Toe avec Docker Volumes
+
+### 1. Configuration du projet
+- Création des fichiers nécessaires :
+  - index.html (interface du jeu)
+  - save.php (sauvegarde des résultats)
+  - results.json (stockage des résultats)
+  - Dockerfile (configuration du conteneur)
+
+### 2. Création du Dockerfile
+```dockerfile
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/
+COPY save.php /usr/share/nginx/html/
+COPY results.json /usr/share/nginx/html/
+EXPOSE 80
+```
+
+### 3. Création du volume et construction de l'image
+```bash
+# Création du volume nommé
+docker volume create game-results
+
+# Construction de l'image
+docker build -t tic-tac-toe .
+```
+![Création Volume](./docker/Jour03/job05/images/create_volume.jpg)
+
+### 4. Lancement du conteneur avec le volume
+```bash
+docker run -d --name tictactoe-game -v game-results:/app/results tic-tac-toe
+```
+![Lancement Conteneur](./docker/Jour03/job05/images/run_container.jpg)
+
+### 5. Vérification du volume et des données
+
+#### Via le terminal
+```bash
+# Vérification des volumes
+docker volume ls
+
+# Inspection du volume
+docker volume inspect game-results
+
+# Affichage du contenu du conteneur
+docker exec -it tictactoe-game ls /usr/share/nginx/html
+
+# Affichage du contenu du fichier results.json
+docker exec -it tictactoe-game cat /usr/share/nginx/html/results.json
+```
+![Vérification Volume](./docker/Jour03/job05/images/volume_inspect.jpg)
+
+#### Via Docker Desktop
+![Docker Desktop Volumes](./docker/Jour03/job05/images/desktop_volumes.jpg)
+
+### 6. Résultats des parties
+Contenu du fichier results.json après plusieurs parties :
+![Résultats Parties](./docker/Jour03/job05/images/results_content.jpg)
+
+### 7. Arrêt du conteneur
+```bash
+docker stop tictactoe-game
+```
+![Arrêt Conteneur](./docker/Jour03/job05/images/stop_container.jpg)
+
