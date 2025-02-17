@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Status API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .status {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Status de l'API</h1>
+    <div class="status" id="status">Chargement...</div>
+
+    <script>
+        function checkStatus() {
+            fetch('http://localhost:3000/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerHTML = `
+                        Status: ${data.status}<br>
+                        Heure du serveur: ${data.time}
+                    `;
+                })
+                .catch(error => {
+                    document.getElementById('status').innerHTML = 'Erreur de connexion à l\'API';
+                });
+        }
+
+        // Vérifier le status toutes les 5 secondes
+        checkStatus();
+        setInterval(checkStatus, 5000);
+    </script>
+</body>
+</html> 

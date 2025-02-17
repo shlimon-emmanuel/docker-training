@@ -350,3 +350,59 @@ docker stop tictactoe-game
 ```
 ![Arrêt Conteneur](./docker/Jour03/job05/images/stop_container.jpg)
 
+# Job 06 - Application Multi-conteneurs avec Docker Compose
+
+## 1. Structure du Projet
+```
+job06/
+├── docker-compose.yml
+├── backend/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── server.js
+└── frontend/
+    └── index.html
+```
+
+## 2. Configuration des Services
+
+### 2.1 Base de données MySQL
+- Port : 3306
+- Utilisateur : root
+- Mot de passe : root
+- Base de données : projetdb
+
+
+### 2.2 Backend Node.js
+- Port : 3000
+- Routes disponibles :
+  - GET / : Message de bienvenue
+  - GET /api/status : État de la connexion à la base de données
+
+![Arrêt des routes](./docker/Jour04/job06/images/stop_routes.jpg)
+
+### 2.3 Frontend Nginx
+- Port : 8080
+- Affiche l'état de l'API en temps réel
+
+
+![Interface](./docker/Jour04/job06/images/interface.jpg)
+
+### 2.4 Adminer
+- Port : 8081
+- Interface d'administration de la base de données
+
+![Interface Adminer](./docker/Jour04/job06/images/interface_adminer.jpg)
+
+## 3. Tests de Connexion
+
+### 3.1 Accès à MySQL via Terminal
+```bash
+docker exec -it job06-database-1 mysql -uroot -proot
+```
+![Acces MySQL](./docker/Jour04/job06/images/access_mysql.jpg)
+
+### 3.2 Vérification des Services
+- Test de la connexion backend -> base de données
+- Test de l'interface Adminer
+- Test du frontend
