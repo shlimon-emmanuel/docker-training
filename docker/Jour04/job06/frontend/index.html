@@ -1,42 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Status API</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-        }
-        .status {
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend</title>
 </head>
+
 <body>
-    <h1>Status de l'API</h1>
-    <div class="status" id="status">Chargement...</div>
-
+    <h1>Bienvenue sur le front de votre projet multi-conteneurs Docker</h1>
+    <p>API status : <span id="status"></span></p>
     <script>
-        function checkStatus() {
-            fetch('http://localhost:3000/api/status')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('status').innerHTML = `
-                        Status: ${data.status}<br>
-                        Heure du serveur: ${data.time}
-                    `;
-                })
-                .catch(error => {
-                    document.getElementById('status').innerHTML = 'Erreur de connexion à l\'API';
-                });
-        }
-
-        // Vérifier le status toutes les 5 secondes
-        checkStatus();
-        setInterval(checkStatus, 5000);
+        // Vérifie l'état de l'API via Nginx (port 8080)
+        fetch('http://localhost:8080/api/status')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('API inaccessible');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('status').textContent = `En ligne : ${data.currentTime}`;
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById('status').textContent = 'API inaccessible';
+            });
     </script>
 </body>
-</html> 
+
+</html>
